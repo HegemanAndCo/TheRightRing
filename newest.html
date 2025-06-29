@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elegant Jewelry Selection</title>
+    <link rel="stylesheet" href="styles2.css" />
+    <link rel="icon" href="https://cdn.glitch.global/71ce20c5-807d-4242-aa0f-5c545493a450/Hegeman_favicon.png?v=1691072796456" />
+</head>
+<body>
+    <div class="main-container">
+        <div class="question-container" id="question-container">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+
+        <!-- Sidebar for selected options -->
+        <div class="sidebar" id="sidebar">
+            <h3>Selected Options</h3>
+            <ul id="selected-options-list">
+                <li id="selected-question1" class="question-item">
+                    Type of Gem: <span></span>
+                </li>
+                <li id="selected-question2" class="question-item">
+                    Gem Cut: <span></span>
+                </li>
+                <li id="selected-question3" class="question-item">
+                    Type of Metal: <span></span>
+                </li>
+                <li id="selected-question4" class="question-item">
+                    Shank: <span id="shank-link">Hover me</span>
+                </li>
+            </ul>
+        </div>
+        <div id="shank-popup" class="popup"><b>Shanks:</b><br>European Shank: helps restraighten ring/prevent twisting.<br><br>Straight Band: flat/square profile with a consistent diameter.<br><br>Straight Tapered Band: flat/square profile. Band widens as it gets to the top.<br><br>Tapered Band: round profile. Band widens as it gets to the top</div>
+
+        <button id="minimize-sidebar" class="minimize-button">&gt;</button>
+    </div>
+
+    <script src="questions2.js"></script>
+    <script src="scripts2.js"></script>
+</body>
+</html>

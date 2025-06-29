@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Type Survey</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+
+    .section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      scroll-snap-align: start;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      scroll-snap-align: center;
+    }
+
+    .option {
+      text-align: center;
+      padding: 10px;
+    }
+
+    .option input[type="radio"] {
+      display: none;
+    }
+
+    .option label {
+      display: block;
+      cursor: pointer;
+    }
+
+    .option img {
+      width: 100px;
+      height: 100px;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+
+    .option label:hover img {
+      border-color: #333;
+    }
+
+    .option input[type="radio"]:checked + label img {
+      border-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Event Type Survey</h1>
+  </div>
+
+  <div class="section" id="section1">
+    <div class="container">
+      <div>
+        <h2>What type of event are you planning?</h2>
+      </div>
+      <div class="option">
+        <input type="radio" id="wedding" name="event_type" value="wedding" />
+        <label for="wedding">
+          <img src="https://via.placeholder.com/100" alt="Wedding" />
+          <div>Wedding</div>
+        </label>
+      </div>
+      <div class="option">
+        <input type="radio" id="engagement" name="event_type" value="engagement" />
+        <label for="engagement">
+          <img src="https://via.placeholder.com/100" alt="Engagement" />
+          <div>Engagement</div>
+        </label>
+      </div>
+      <div class="option">
+        <input type="radio" id="other" name="event_type" value="other" />
+        <label for="other">
+          <img src="https://via.placeholder.com/100" alt="Other" />
+          <div>Other</div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="section2">
+    <!-- Second question will be added dynamically once the first one is answered -->
+  </div>
+
+  <div class="section" id="section3">
+    <!-- Third question will be added dynamically once the second one is answered -->
+  </div>
+
+  <script>
+    document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+      radio.addEventListener("change", () => {
+        const nextSection = document.getElementById("section2");
+        if (nextSection) {
+          const selectedValue = document.querySelector(
+            'input[name="event_type"]:checked'
+          ).value;
+          let secondQuestionHTML = "";
+
+          if (selectedValue === "engagement") {
+            secondQuestionHTML = `
+            <div class="container">
+              <h2>What type of engagement ring are you looking for?</h2>
+              <div class="option">
+                <input type="radio" id="diamond" name="ring_type" value="diamond">
+                <label for="diamond">Diamond</label>
+              </div>
+              <div class="option">
+                <input type="radio" id="gemstone" name="ring_type" value="gemstone">
+                <label for="gemstone">Gemstone</label>
+              </div>
+              <div class="option">
+                <input type="radio" id="custom" name="ring_type" value="custom">
+                <label for="custom">Custom Design</label>
+              </div>
+            </div>
+          `;
+          } else if (selectedValue === "wedding") {
+            secondQuestionHTML = `
+            <div class="container">
+              <h2>What style of wedding band do you prefer?</h2>
+              <div class="option">
+                <input type="radio" id="classic" name="band_style" value="classic">
+                <label for="classic">Classic</label>
+              </div>
+              <div class="option">
+                <input type="radio" id="modern" name="band_style" value="modern">
+                <label for="modern">Modern</label>
+              </div>
+              <div class="option">
+                <input type="radio" id="vintage" name="band_style" value="vintage">
+                <label for="vintage">Vintage</label>
+              </div>
+            </div>
+          `;
+          } else if (selectedValue === "other") {
+            secondQuestionHTML = `
+            <div class="container">
+              <h2>What type of event are you planning?</h2>
+              <div class="option">
+                <input type="radio" id="birthday" name="event_type_other" value="birthday">
+                <label for="birthday">Birthday</label>
+              </div>
+              <div class="option">
+                <input type="radio" id="corporate" name="event_type_other" value="corporate">
+                <label for="corporate">Corporate</label>
+              </div>
+              <div class="option">
+                <input type="radio" id="other_event" name="event_type_other" value="other_event">
+                <label for="other_event">Other</label>
+              </div>
+            </div>
+          `;
+          }
+
+          nextSection.innerHTML = secondQuestionHTML;
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+      radio.addEventListener("change", () => {
+        const nextSection = document.getElementById("section3");
+        if (nextSection) {
+          const selectedValue = document.querySelector(
+            'input[name="event_type"]:checked'
+          ).value;
+          let thirdQuestionHTML = "";
+
+          if (selectedValue === "engagement") {
+            const engagementType = document.querySelector(
+              'input[name="ring_type"]:checked'
+            ).value;
+
+                        if (engagementType === "diamond") {
+              thirdQuestionHTML = `
+                <div class="container">
+                  <h2>What shape of diamond do you prefer?</h2>
+                  <div class="option">
+                    <input type="radio" id="round" name="diamond_shape" value="round">
+                    <label for="round">Round</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" id="princess" name="diamond_shape" value="princess">
+                    <label for="princess">Princess</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" id="emerald" name="diamond_shape" value="emerald">
+                    <label for="emerald">Emerald</label>
+                  </div>
+                </div>
+              `;
+            } else if (engagementType === "gemstone") {
+              thirdQuestionHTML = `
+                <div class="container">
+                  <h2>What type of gemstone do you prefer?</h2>
+                  <div class="option">
+                    <input type="radio" id="sapphire" name="gemstone_type" value="sapphire">
+                    <label for="sapphire">Sapphire</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" id="ruby" name="gemstone_type" value="ruby">
+                    <label for="ruby">Ruby</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" id="emerald_gem" name="gemstone_type" value="emerald_gem">
+                    <label for="emerald_gem">Emerald</label>
+                  </div>
+                </div>
+              `;
+            }
+          } else if (selectedValue === "wedding") {
+            const weddingStyle = document.querySelector(
+              'input[name="band_style"]:checked'
+            ).value;
+
+            if (weddingStyle === "classic") {
+              thirdQuestionHTML = `
+                <div class="container">
+                  <h2>What metal do you prefer for the classic band?</h2>
+                  <div class="option">
+                    <input type="radio" id="gold" name="metal_type" value="gold">
+                    <label for="gold">Gold</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" id="platinum" name="metal_type" value="platinum">
+                    <label for="platinum">Platinum</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" id="silver" name="metal_type" value="silver">
+                    <label for="silver">Silver</label>
+                  </div>
+                </div>
+              `;
+            }
+            // Add similar conditions for other wedding styles if needed
+          }
+
+          nextSection.innerHTML = thirdQuestionHTML;
+          nextSection.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

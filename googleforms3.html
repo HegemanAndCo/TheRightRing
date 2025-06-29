@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Button Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .option {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .option label {
+            display: block;
+            cursor: pointer;
+        }
+
+        .option img {
+            width: 100px;
+            height: 100px;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .option label:hover img {
+            border-color: #333;
+        }
+
+        .option input[type="radio"]:checked + label img {
+            border-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Questionnaire</h1>
+    </div>
+
+    <form id="radioForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeMhFzKsPSO2Kh-ObQrKtt-G51xOpaIMa0aFGeZWCNibkE3_Q/formResponse" method="POST">
+        <div class="container">
+            <div>
+                <h2>Question 1:</h2>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1a1" name="question1" value="Answer1_1">
+                <label for="q1a1">
+                    <img src="https://via.placeholder.com/100" alt="Answer 1.1">
+                    <div>Answer 1.1</div>
+                </label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1a2" name="question1" value="Answer1_2">
+                <label for="q1a2">
+                    <img src="https://via.placeholder.com/100" alt="Answer 1.2">
+                    <div>Answer 1.2</div>
+                </label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q1a3" name="question1" value="Answer1_3">
+                <label for="q1a3">
+                    <img src="https://via.placeholder.com/100" alt="Answer 1.3">
+                    <div>Answer 1.3</div>
+                </label>
+            </div>
+        </div>
+
+        <div class="container">
+            <div>
+                <h2>Question 2:</h2>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2a1" name="question2" value="Answer2_1">
+                <label for="q2a1">
+                    <img src="https://via.placeholder.com/100" alt="Answer 2.1">
+                    <div>Answer 2.1</div>
+                </label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2a2" name="question2" value="Answer2_2">
+                <label for="q2a2">
+                    <img src="https://via.placeholder.com/100" alt="Answer 2.2">
+                    <div>Answer 2.2</div>
+                </label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q2a3" name="question2" value="Answer2_3">
+                <label for="q2a3">
+                    <img src="https://via.placeholder.com/100" alt="Answer 2.3">
+                    <div>Answer 2.3</div>
+                </label>
+            </div>
+        </div>
+
+        <div class="container">
+            <div>
+                <h2>Question 3:</h2>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3a1" name="question3" value="Answer3_1">
+                <label for="q3a1">
+                    <img src="https://via.placeholder.com/100" alt="Answer 3.1">
+                    <div>Answer 3.1</div>
+                </label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3a2" name="question3" value="Answer3_2">
+                <label for="q3a2">
+                    <img src="https://via.placeholder.com/100" alt="Answer 3.2">
+                    <div>Answer 3.2</div>
+                </label>
+            </div>
+            <div class="option">
+                <input type="radio" id="q3a3" name="question3" value="Answer3_3">
+                <label for="q3a3">
+                    <img src="https://via.placeholder.com/100" alt="Answer 3.3">
+                    <div>Answer 3.3</div>
+                </label>
+            </div>
+        </div>
+
+        <input type="hidden" id="combinedAnswers" name="entry.1386704910" value="">
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+    
+    <script>
+        function submitForm() {
+            const question1 = document.querySelector('input[name="question1"]:checked');
+            const question2 = document.querySelector('input[name="question2"]:checked');
+            const question3 = document.querySelector('input[name="question3"]:checked');
+
+            const answers = [question1, question2, question3].filter(answer => answer !== null).map(answer => answer.value);
+            const combinedAnswers = answers.join(", ");
+            document.getElementById('combinedAnswers').value = combinedAnswers;
+
+            const form = document.getElementById('radioForm');
+            const formData = new FormData(form);
+
+            // Submit the form data to Google Forms
+            fetch(form.action, {
+                method: "POST",
+                body: formData
+            }).then(response => {
+                // Handle response if needed
+                console.log("Form submitted successfully");
+            }).catch(error => {
+                // Handle errors if any
+                console.error("Error submitting form:", error);
+            });
+
+            // Redirect to YouTube
+            window.location.href = "https://www.youtube.com";
+        }
+    </script>
+</body>
+</html>

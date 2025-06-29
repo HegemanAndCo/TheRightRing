@@ -1,0 +1,868 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap');
+
+.text-input, .text-area {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+
+.text-area {
+    height: 150px; /* Adjust height as needed */
+    resize: vertical; /* Allow vertical resize */
+}
+
+.text-input::placeholder,
+.text-area::placeholder {
+    font-family: 'Raleway', sans-serif;
+    color: #999; /* You can change the color if needed */
+}
+
+@font-face {
+    font-family: 'Metal';
+    src: url('https://fonts.gstatic.com/s/metal/v30/lW-wwjUJIXTo7h3glIU.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    background-color: #f7f7f7;
+    color: #232429;
+    overflow: hidden;
+}
+
+.progress-section {
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000; /* Ensure progress section is on top */
+}
+
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.progress-step {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #232429;
+    border-top: 1px solid #232429;
+    position: relative;
+    background-color: #f7f7f7;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%, 20px 50%);
+    margin-right: -20px;
+}
+
+.progress-step:last-child {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 20px 50%);
+    margin-right: 0;
+}
+
+.progress-step.active {
+    background-color: #d3d3d3;
+}
+
+.progress-step.previous {
+    background-color: #a9a9a9;
+}
+
+.main-container {
+    display: flex;
+    height: calc(100vh - 20px); /* Adjust height to account for progress tracker */
+    flex-direction: column;
+    margin-top: 20px; /* Move content down below the progress tracker */
+}
+
+.question-container {
+    text-align: center;
+    width: calc(82%); /* Adjust to exclude the sidebar */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 5px;
+    transition: width 0.5s ease-in-out;
+}
+
+.question-container.expanded {
+    width: 100%;
+}
+
+.question-title {
+    margin: 5px;
+    font-size: 30px;
+    font-family: 'Metal', sans-serif;
+}
+
+.options-container {
+    width: 100%;
+    height: 60vh; /* Increased max-height */ /* CHANGE THIS TO MOVE BUTTONS */
+    overflow-y: auto;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fafafa;
+}
+
+.sidebar {
+    width: 17%;
+    background-color: #ffffff;
+    padding: 20px;
+    position: fixed;
+    right: 0;
+    top: 41px; /* Adjust to be below the progress tracker */
+    height: calc(100vh - 60px); /* Adjust height to be below the progress tracker */
+    overflow-y: auto;
+    z-index: 10002; /* Ensure sidebar is in front */
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    font-size: 20px;
+    border-bottom: 2px solid #232429;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #232429;
+    z-index: 10003; /* Ensure sidebar text is in front */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    z-index: 10003; /* Ensure sidebar list is in front */
+}
+
+.sidebar li {
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.sidebar .question-item {
+    display: none;
+}
+
+.sidebar.minimized {
+    transform: translateX(100%);
+}
+
+.sidebar.minimized + .popup,
+.sidebar.minimized + .option-popup {
+    left: 0;
+    width: 100%;
+    top: 0;
+}
+
+.question {
+    display: none;
+    width: 100%;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.current-question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-in-reverse {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-out-reverse {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+.slide-in {
+    animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.5s forwards;
+}
+
+.slide-in-reverse {
+    animation: slide-in-reverse 0.5s forwards;
+}
+
+.slide-out-reverse {
+    animation: slide-out-reverse 0.5s forwards;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 30px; /* Increase gap for larger options */
+    row-gap: 5px;
+}
+
+.option-container {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    width: 250px; /* Increase the width */
+    height: 300px; /* Increase the height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.option-container:hover {
+    transform: scale(1.05);
+}
+
+.option-content {
+    border: 1px solid #ddd;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden; /* Ensure content fills the box */
+}
+
+.option-content p {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+}
+
+.option-content .image-box,
+.option-content .color-box,
+.option-content .video-box {
+    width: 250px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-content .video-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + .option-content {
+    border-color: #232429;
+    background-color: #e7e7e7;
+}
+
+iframe {
+    display: block;
+    margin: 5px auto;
+    width: 75%;
+    height: 35vh;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #232429;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    outline: none;
+}
+
+button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+button:active {
+    background-color: #111;
+    transform: scale(0.95);
+}
+
+button:focus {
+    box-shadow: 0 0 0 2px #ccc;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 5px; /* Increase space above button */
+    width: 100%;
+}
+
+.button-container button {
+    margin: 0 15px;
+}
+
+.minimize-button {
+    position: fixed;
+    right: 0;
+    top: 70px; /* Adjust to be below the progress tracker */
+    background-color: #232429;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 10004; /* Ensure minimize button is in front */
+    font-family: 'Helvetica Neue', sans-serif;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.main-container.expanded {
+    width: 100%;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 41px;
+    left: 0;
+    width: calc(100% - 22%); /* This line sets the width */
+    height: calc(100vh - 60px);
+    background-color: rgba(0, 0, 0, 0.5); /* Lighter background */
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    transition: left 0.5s ease-in-out, width 0.5s ease-in-out;
+}
+
+.option-popup {
+    display: none;
+    position: fixed;
+    top: 41px;
+    left: 0;
+    width: 82%; /* Ensure it fills the left side */
+    height: calc(100vh - 60px);
+    background-color: rgba(0, 0, 0, 0.5); /* Lighter background */
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    transition: left 0.5s ease-in-out, width 0.5s ease-in-out;
+}
+
+.option-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* Ensure it fills the entire popup */
+    max-width: 800px; /* Remove max-width to use the full space */
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.5s;
+}
+
+.option-popup-content p {
+    width: 100%; /* Adjust this width as needed */
+    max-width: 800px; /* Set a max-width to limit the text width */
+    margin: 0 auto; /* Center the text */
+    text-align: center; /* Or 'center' or 'right' depending on your preference */
+    font-size: 16px; /* Adjust the font size if needed */
+    line-height: 125%;
+}
+
+
+/* Styles for the new image in the welcome popup */
+.option-popup-content img {
+    display: block;
+    margin: 0 auto 20px; /* Center the image and add space below */
+    object-fit: contain;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s forwards; /* Ensure the fade-out completes */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.popup-next-button {
+    background-color: #232429;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    outline: none;
+    margin-top: 20px;
+    font-family: 'Raleway', sans-serif; /* Ensure it uses the Raleway font */
+}
+
+.popup-next-button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+.popup-next-button:active {
+    background-color: #111;
+    transform: scale(0.95);
+}
+
+.popup-next-button:focus {
+    box-shadow: 0 0 0 2px #ccc;
+}
+
+.other-dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: block;
+}
+
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question-item {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.question-item.show {
+    display: list-item;
+    animation: fadeInSlideUp 0.5s forwards;
+}
+
+.loading-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F7F7F7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
+}
+
+.loading-circle {
+    border: 3px solid #cdcdcd;
+    border-radius: 50%;
+    border-top: 3px solid #232429;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #232429;
+    font-family: 'Raleway', sans-serif; /* Change the font here */
+}
+
+.loading-image {
+    width: 300px;
+    height: 150px;
+    margin-top: 20px;
+}
+
+/* Add this to your existing styles.css file */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.loading-screen.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+.back-button {
+    position: fixed;
+    top: 50px; /* Adjust to be below the progress tracker */
+    left: 10px;
+    background-color: transparent;
+    border: 1px solid #232429; /* Assuming #232429 is the current background color */
+    color: #232429; /* Same as the border color */
+    padding: 8px 13px; /* Adjusted padding for the border */
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    font-family: 'Raleway', sans-serif;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+    background-color: rgba(35, 36, 41, 0.1); /* Slightly darkened background on hover */
+    transform: scale(1.05);
+}
+
+.back-button:active {
+    background-color: rgba(35, 36, 41, 0.2); /* Slightly more darkened background on active */
+    transform: scale(0.95);
+}
+
+.back-button:focus {
+    box-shadow: 0 0 0 2px #ccc;
+}
+
+.option-content {
+    border: 1px solid #ddd;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.option-content p {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.progress-step {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #232429;
+    border-top: 1px solid #232429;
+    position: relative;
+    background-color: #f7f7f7;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%, 10px 50%);
+    margin-right: -20px;
+}
+
+.progress-step:last-child {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 10px 50%);
+    margin-right: 0;
+}
+
+.progress-step.active {
+    background-color: #a9a9a9;
+}
+
+.progress-step.previous {
+    background-color: #d3d3d3;
+}
+
+.final-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+}
+
+.final-screen h2 {
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+.final-screen .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Add space between buttons */
+}
+
+.dropdown {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    background-color: #fafafa;
+    color: #232429;
+}
+
+.dropdown option[value=""] {
+    display: none;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 809px) {
+    .progress-step {
+        font-size: 12px; /* Adjust as needed to fit the text in one line */
+        height: 20px;
+        align-content: center;
+    }
+
+    .progress-container {
+        height: 20px; /* Set the height of the progress bar */
+    }
+
+    .option-popup-content {
+        font-size: 12px;
+        height: auto;
+        max-height: 80vh; /* Set the max height to 80% of the viewport height */
+        overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+    }
+
+    .sidebar {
+        transform: translateX(0); /* Ensure it stays in place */
+        width: 0;
+        overflow: hidden;
+        transition: width 0.5s ease-in-out;
+        top: 41px;
+    }
+
+    .sidebar.minimized {
+        width: 0;
+
+        overflow: hidden;
+    }
+
+    .sidebar.expanded {
+        width: 80%; /* Adjust width as needed */
+        transform: translateX(0);
+        overflow: auto;
+    }
+
+    .main-container.expanded {
+        width: 100%;
+    }
+
+    .question-container {
+        width: 100%;
+    }
+
+    .main-container {
+        margin-top: 41px;
+    }
+
+    .minimize-button {
+        display: block; /* Ensure the button is visible */
+        top: 70px; /* Adjust position if needed */
+        right: 0;
+        background-color: #232429;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        z-index: 10004; /* Ensure minimize button is in front */
+        font-family: 'Helvetica Neue', sans-serif;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .back-button {
+        font-size: 12px; /* Shrink the home button */
+        padding: 5px 10px; /* Adjust padding as needed */
+        top: 50px; /* Adjust position to avoid overlap */
+    }
+
+    .progress-step {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #232429;
+        border-top: 1px solid #232429;
+        position: relative;
+        background-color: #f7f7f7;
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%, 10px 50%);
+        margin-right: -20px;
+    }
+
+    .progress-step:last-child {
+        clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 10px 50%);
+        margin-right: 0;
+    }
+
+    .question-title {
+        font-size: 20px;
+        margin: 0px;
+        height: 25px;
+    }
+
+    .options {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        column-gap: 5px; /* Increase gap for larger options */
+        row-gap: 5px;
+    }
+
+    .options-container {
+        width: 100%;
+        height: 65vh; /* Increased max-height */
+        overflow-y: auto;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #fafafa;
+    }
+
+    .option-container {
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s;
+        width: 150px; /* Increase the width */
+        height: 200px; /* Increase the height */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .option-content .image-box,
+    .option-content .color-box,
+    .option-content .video-box {
+        width: 150px;
+        height: 150px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+
+
+    .option-container:hover {
+        transform: scale(1.05);
+    }
+
+    .popup, .option-popup {
+        left: 0;
+        width: 100%;
+        height: 100%;
+        top: 41px; /* Adjust to be below the progress tracker */
+    }
+
+    #iframe-question95 {
+        height: 300px; /* Set your desired height for mobile devices */
+        max-width: 500px;
+    }
+}
+
+
