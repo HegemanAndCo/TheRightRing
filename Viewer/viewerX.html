@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>3D showcase</title><meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1,maximum-scale=1"><link rel="icon" href="https://cdn.glitch.global/71ce20c5-807d-4242-aa0f-5c545493a450/Hegeman_favicon.png?v=1691072796456"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/gh/repalash/gilroy-free-webfont@master/Gilroy-Extrabold.css" rel="stylesheet"><style>::-webkit-scrollbar
+    {
+      width: 8px;  /* for vertical scrollbars */
+      height: 8px; /* for horizontal scrollbars */
+    }
+    ::-webkit-scrollbar-track
+    {
+      background: rgba(64, 64, 64, 0.4);
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb
+    {
+      background: rgba(128, 128, 128, 0.2);
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-corner {background: rgba(0,0,0,0.5);}</style><style>body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      /*background-color: blue;*/
+      /*background-color: black;*/
+      background-color: white;
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    #mcanvas {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      /*touch-action: none;*/
+      z-index: -1;
+      /*pointer-events: none; // dont */
+    }
+    #canvasContainer{
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 5;
+    }
+
+    .font-inter {
+      font-family: 'Inter', sans-serif !important;
+    }
+
+    .font-gilroy {
+      font-family: 'Gilroy', sans-serif !important;
+    }</style><script defer="defer" src="https://the-right-ring.glitch.me/Viewer/runtime.d96eebae.js"></script><script defer="defer" src="https://the-right-ring.glitch.me/Viewer/three.js-bundle.1474d82c.js"></script><script defer="defer" src="https://the-right-ring.glitch.me/Viewer/425.c7ae1d63.js"></script><script defer="defer" src="https://the-right-ring.glitch.me/Viewer/774.c21e8f2e.js"></script><script defer="defer" src="https://the-right-ring.glitch.me/Viewer/671.b3a59ef8.js"></script><script defer="defer" src="https://the-right-ring.glitch.me/Viewer/412.f70c5bfd.js"></script><script defer="defer" src="https://the-right-ring.glitch.me/Viewer/coreviewer.3763f14d.js"></script></head><body><div id="canvasContainer"><canvas id="mcanvas"></canvas></div></body><script>let listener = function (e) {
+    if (e.key === '\\') {
+            e.preventDefault();
+            (function () {var script = document.createElement('script');script.onload = function () {var stats = new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop () {stats.update();requestAnimationFrame(loop)});};script.src = '//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})();
+    }
+    document.removeEventListener('keypress', listener);
+}
+document.addEventListener('keypress', listener);</script></html>

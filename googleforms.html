@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <h1>Survey Form</h1>
+    <form id="surveyForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeMhFzKsPSO2Kh-ObQrKtt-G51xOpaIMa0aFGeZWCNibkE3_Q/formResponse" method="POST">
+
+        <div>
+            <label for="">Untitled Question </label>
+            <select id="untitledquestion" name="entry.1386704910" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="tosection2">To Section 2</option>
+                <option value="tosection3">To Section 3</option>
+            </select>
+        </div>
+      <div>
+            <label for="">Answer for Section 2 </label>
+            <select id="question2" name="entry.353633339">
+                <option value="" disabled selected>Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+      <div>
+            <label for="">Answer for Section 3 </label>
+            <select id="question3" name="entry.entry.737301758">
+                <option value="" disabled selected>Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("surveyForm").addEventListener("submit", function(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+
+            // Submit the form data to Google Forms
+            fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLSc4x2onrG-c_HqUYGWmg77x6mLu1Q13tgZbAnjx2EaDxGPPiA/formResponse", {
+                method: "POST",
+                body: new FormData(document.getElementById("surveyForm"))
+            }).then(response => {
+                // Handle response if needed
+                console.log("Form submitted successfully");
+            }).catch(error => {
+                // Handle errors if any
+                console.error("Error submitting form:", error);
+            });
+
+            // Redirect to YouTube
+            window.location.href = "https://www.youtube.com";
+        });
+    </script>
+</body>
+</html>

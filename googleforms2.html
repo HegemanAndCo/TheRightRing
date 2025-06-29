@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Button Form</title>
+</head>
+<body>
+    <form id="radioForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeMhFzKsPSO2Kh-ObQrKtt-G51xOpaIMa0aFGeZWCNibkE3_Q/formResponse" method="POST">
+        <label>Question 1:</label><br>
+        <input type="radio" id="q1a1" name="question1" value="Answer1_1">
+        <label for="q1a1">Answer 1.1</label><br>
+        <input type="radio" id="q1a2" name="question1" value="Answer1_2">
+        <label for="q1a2">Answer 1.2</label><br>
+        <input type="radio" id="q1a3" name="question1" value="Answer1_3">
+        <label for="q1a3">Answer 1.3</label><br>
+        <br>
+
+        <label>Question 2:</label><br>
+        <input type="radio" id="q2a1" name="question2" value="Answer2_1">
+        <label for="q2a1">Answer 2.1</label><br>
+        <input type="radio" id="q2a2" name="question2" value="Answer2_2">
+        <label for="q2a2">Answer 2.2</label><br>
+        <input type="radio" id="q2a3" name="question2" value="Answer2_3">
+        <label for="q2a3">Answer 2.3</label><br>
+        <br>
+
+        <label>Question 3:</label><br>
+        <input type="radio" id="q3a1" name="question3" value="Answer3_1">
+        <label for="q3a1">Answer 3.1</label><br>
+        <input type="radio" id="q3a2" name="question3" value="Answer3_2">
+        <label for="q3a2">Answer 3.2</label><br>
+        <input type="radio" id="q3a3" name="question3" value="Answer3_3">
+        <label for="q3a3">Answer 3.3</label><br>
+        <br>
+
+        <input type="hidden" id="combinedAnswers" name="entry.1386704910" value="">
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+    
+    <script>
+        function submitForm() {
+            const question1 = document.querySelector('input[name="question1"]:checked');
+            const question2 = document.querySelector('input[name="question2"]:checked');
+            const question3 = document.querySelector('input[name="question3"]:checked');
+
+            const answers = [question1, question2, question3].filter(answer => answer !== null).map(answer => answer.value);
+            const combinedAnswers = answers.join(", ");
+            document.getElementById('combinedAnswers').value = combinedAnswers;
+
+            const form = document.getElementById('radioForm');
+            const formData = new FormData(form);
+
+            // Submit the form data to Google Forms
+            fetch(form.action, {
+                method: "POST",
+                body: formData
+            }).then(response => {
+                // Handle response if needed
+                console.log("Form submitted successfully");
+            }).catch(error => {
+                // Handle errors if any
+                console.error("Error submitting form:", error);
+            });
+
+            // Redirect to YouTube
+            window.location.href = "https://www.youtube.com";
+        }
+    </script>
+</body>
+</html>

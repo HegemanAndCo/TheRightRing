@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid of Embeds</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            width: 90%;
+            max-width: 1200px;
+            margin-bottom: 20px;
+        }
+        .grid-item {
+            display: none;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            width: 90%;
+            max-width: 1200px;
+            margin-bottom: 20px;
+        }
+        .button-container button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button onclick="showEmbed(0)">Embed 1</button>
+        <button onclick="showEmbed(1)">Embed 2</button>
+        <button onclick="showEmbed(2)">Embed 3</button>
+        <button onclick="showEmbed(3)">Embed 4</button>
+        <button onclick="showEmbed(4)">Embed 5</button>
+        <button onclick="showEmbed(5)">Embed 6</button>
+        <button onclick="showEmbed(6)">Embed 7</button>
+        <button onclick="showEmbed(7)">Embed 8</button>
+        <button onclick="showEmbed(8)">Embed 9</button>
+        <button onclick="showEmbed(9)">Embed 10</button>
+        <button onclick="showEmbed(10)">Embed 11</button>
+        <button onclick="showEmbed(11)">Embed 12</button>
+        <button onclick="showEmbed(12)">Embed 13</button>
+        <button onclick="showEmbed(13)">Embed 14</button>
+        <button onclick="showEmbed(14)">Embed 15</button>
+        <button onclick="showEmbed(15)">Embed 16</button>
+        <button onclick="showEmbed(16)">Embed 17</button>
+        <button onclick="showEmbed(17)">Embed 18</button>
+        <button onclick="showEmbed(18)">Embed 19</button>
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundAlmandineGarnet.glb?v=1716651004893"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundAmethyst.glb?v=1716651005084"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundAqua.glb?v=1716651005261"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundBGTourm.glb?v=1716651005438"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundBlueSapph.glb?v=1716651005738"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundCitrine.glb?v=1716651005914"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundDiamond.glb?v=1716651006123"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundEmerald.glb?v=1716651006268"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundGreenSapphire.glb?v=1716651006414"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundHessGarnet.glb?v=1716651006668"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundPeridot.glb?v=1716651006836"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundPinkSapph.glb?v=1716651006991"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundPinkTourm.glb?v=1716651007193"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundRuby.glb?v=1716651007366"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundSpessGarnet.glb?v=1716651007538"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundTanzanite.glb?v=1716651007695"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundTopaz.glb?v=1716651007854"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundYellowSapph.glb?v=1716651008071"></div>
+        <div class="grid-item" data-src="https://the-right-ring.glitch.me/Viewer/viewer.html?m=https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/RoundZircon.glb"></div>
+    </div>
+
+    <script>
+        function showEmbed(index) {
+            const items = document.querySelectorAll('.grid-item');
+            items.forEach((item, i) => {
+                if (i === index) {
+                    if (!item.querySelector('embed')) {
+                        const embed = document.createElement('embed');
+                        embed.src = item.getAttribute('data-src');
+                        item.appendChild(embed);
+                    }
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

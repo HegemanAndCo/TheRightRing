@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Right Ring - Engagement Ring Builder</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/Favicon_therightring.png?v=1719068688242" />
+</head>
+<body>
+    <!-- Progress Tracker -->
+    <div class="progress-container">
+    <div class="progress-step" id="step-stone" data-category="stone" data-question-id="1">Stone</div>
+    <div class="progress-step" id="step-shape" data-category="shape" data-question-id="2">Cut</div>
+    <div class="progress-step" id="step-metal" data-category="metal" data-question-id="3">Metal</div>
+    <div class="progress-step" id="step-head" data-category="head" data-question-id="4">Head</div>
+    <div class="progress-step" id="step-band" data-category="band" data-question-id="5">Band</div>
+    <div class="progress-step" id="step-sidestones" data-category="sidestones" data-question-id="6">Side Stones</div>
+    <div class="progress-step" id="step-finalinfo" data-category="finalinfo" data-question-id="91">Final Info</div>
+</div>
+
+
+    <button id="back-button" class="back-button" onclick="goBack()">Home</button>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <img src="https://utfs.io/f/5c59c321-c51e-4d63-aa64-a0897c7bb921-x1s6ta.png" alt="Loading Image" class="loading-image">
+        <div class="loading-circle"></div>
+        <p id="loading-text" class="loading-text">Putting together the options...</p>
+    </div>
+
+    <div class="main-container" style="display: none;">
+        <div class="question-container" id="question-container">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+
+        <!-- Sidebar for selected options -->
+        <div class="sidebar" id="sidebar">
+            <h3>Selected Options</h3>
+            <ul id="selected-options-list">
+                <li id="selected-question1" class="question-item">
+                    <b>Type of Gem:</b> <span></span>
+                </li>
+                <li id="selected-question2" class="question-item">
+                    <b>Gem Shape:</b> <span></span>
+                </li>
+                <li id="selected-question3" class="question-item">
+                    <b>Type of Metal:</b> <span></span>
+                </li>
+                <li id="selected-question4" class="question-item">
+                    <b>Head:</b> <span></span>
+                </li>
+                <li id="selected-question5" class="question-item">
+                    <b>Shank/Band:</b> <span></span>
+                </li>
+                <li id="selected-question6" class="question-item">
+                    <b>Side Stones:</b> <span></span>
+                </li>
+                <li id="selected-question89" class="question-item">
+                    <b>Ring Size:</b> <span></span>
+                </li>
+                <li id="selected-question90" class="question-item">
+                    <b>Budget:</b> <span></span>
+                </li>
+                <li id="selected-question91" class="question-item">
+                    <b>Additional Comments:</b> <span></span>
+                </li>
+                <li id="selected-question92" class="question-item">
+                    <b>Name:</b> <span></span>
+                </li>
+                <li id="selected-question93" class="question-item">
+                    <b>Email:</b> <span></span>
+                </li>
+            </ul>
+        </div>
+        <button id="minimize-sidebar" class="minimize-button">&gt;</button>
+    </div>
+
+    <form id="radioForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeMhFzKsPSO2Kh-ObQrKtt-G51xOpaIMa0aFGeZWCNibkE3_Q/formResponse" method="POST">
+        <input type="hidden" id="combinedAnswers" name="entry.1386704910" value="">
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <!-- Overlay/Popup -->
+    <div id="option-popup" class="option-popup" onclick="closePopupOnClick(event)">
+        <div class="option-popup-content">
+            <span class="close-popup" onclick="closePopup()">&times;</span>
+            <h2 id="popup-title"></h2>
+            <p id="popup-description"></p>
+            <iframe id="popup-iframe" src="" frameborder="0"></iframe>
+            <button id="popup-next-button" class="popup-next-button" onclick="nextQuestionFromPopup()">Next</button>
+        </div>
+    </div>
+
+<!-- New Popup -->
+<div id="new-popup" class="option-popup" onclick="closeNewPopupOnClick(event)">
+    <div class="option-popup-content">
+        <span class="close-popup" onclick="closeNewPopup()">&times;</span>
+        <!-- Added Image -->
+        <img src="https://cdn.glitch.global/2fe9c80c-8a74-463a-8aee-4ed23ec85c51/TheRightRing%20Transparent%20Logo%20DARK%20BLUE.png?v=1720807052684" alt="The Right Ring Logo" width="80%
+" height="40%">
+        <h2 id="new-popup-title">Welcome to The Right Ring!</h2>
+        <p id="new-popup-description">We are excited to help you create the perfect engagement ring. Follow the steps and choose the options that suit your style. Once you have selected each of the parts to your ring, we will show you what it could look like finally put together.</p>
+        <button id="get-started-button" class="popup-next-button" onclick="closeNewPopup()">Get Started!</button>
+    </div>
+</div>
+
+
+
+
+    <script src="questions.js"></script>
+    <script src="scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</body>
+</html>
